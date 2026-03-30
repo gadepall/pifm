@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {I}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {II}Basic Working of Radio Communication}{2}{section.2}%
+\contentsline {section}{\numberline {III}Working of RTL-SDR}{3}{section.3}%
+\contentsline {subsection}{\numberline {\mbox {III-A}}The Hardware: From Antenna to Digital Data}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {\mbox {III-B}}IQ samples:}{3}{subsection.3.2}%
+\contentsline {section}{\numberline {IV}Trying to receive RF using a mobile app}{3}{section.4}%
+\contentsline {section}{\numberline {V}Local Frequency Reception Using GNU Radio}{4}{section.5}%
+\contentsline {subsection}{\numberline {\mbox {V-A}}Installation of GNU Radio}{4}{subsection.5.1}%
+\contentsline {subsection}{\numberline {\mbox {V-B}}Digital Signal Processing(DSP) Flow graph}{4}{subsection.5.2}%
+\contentsline {subsection}{\numberline {\mbox {V-C}}Observations}{6}{subsection.5.3}%
+\contentsline {section}{\numberline {VI}Experimental Validation of RTL-SDR Receiver Using a Raspberry Pi Based FM Transmitter}{7}{section.6}%
+\contentsline {section}{\numberline {VII}RF Reception Using Python}{7}{section.7}%
+\contentsline {section}{\numberline {VIII}Radio Frequency Reception Using Raspberry Pi}{8}{section.8}%
+\contentsline {subsection}{\numberline {\mbox {VIII-A}}Initial Attempt Using RealVNC to Access Raspberry Pi Terminal}{8}{subsection.8.1}%
+\contentsline {subsection}{\numberline {\mbox {VIII-B}}Accessing Raspberry Pi via SSH from WSL Terminal}{9}{subsection.8.2}%
