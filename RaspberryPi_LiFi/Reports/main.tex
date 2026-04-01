@@ -1,0 +1,369 @@
+\documentclass[10pt, twocolumn, a4paper]{article}
+
+% ─── Packages ────────────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1.8cm, top=2.2cm, bottom=2.2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{mdframed}
+
+% ─── Colour Palette ──────────────────────────────────────────────────────────
+\definecolor{accentblue}{RGB}{13, 71, 161}
+\definecolor{lightgray}{RGB}{245, 246, 248}
+\definecolor{codegreen}{RGB}{27, 94, 32}
+\definecolor{codegray}{RGB}{97, 97, 97}
+\definecolor{codepurple}{RGB}{74, 20, 140}
+\definecolor{codeorange}{RGB}{230, 81, 0}
+\definecolor{warnyellow}{RGB}{230, 126, 34}
+
+% ─── Hyperref ────────────────────────────────────────────────────────────────
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accentblue,
+    urlcolor=accentblue,
+    citecolor=accentblue,
+    pdftitle={LiFi Communication System using Raspberry Pi},
+    pdfauthor={Engineering Project Report}
+}
+
+% ─── Section Formatting ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\normalfont\large\bfseries\color{accentblue}}
+  {\thesection.}{0.5em}{}
+  [\vspace{-4pt}\rule{\linewidth}{0.5pt}\vspace{2pt}]
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries\color{accentblue!80!black}}
+  {\thesubsection}{0.5em}{}
+
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titlespacing*{\subsection}{0pt}{7pt}{2pt}
+
+% ─── Code Listings ───────────────────────────────────────────────────────────
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    basicstyle=\ttfamily\fontsize{6.5}{8}\selectfont,
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single,
+    framerule=0.4pt,
+    rulecolor=\color{accentblue!40},
+    backgroundcolor=\color{lightgray},
+    keywordstyle=\color{codepurple}\bfseries,
+    commentstyle=\color{codegreen}\itshape,
+    stringstyle=\color{codeorange},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\fontsize{5}{6}\selectfont\color{codegray},
+    numbersep=6pt,
+    xleftmargin=12pt,
+    xrightmargin=4pt,
+    tabsize=4,
+    captionpos=b
+}
+\lstset{style=pythonstyle}
+
+% ─── Caption Styling ─────────────────────────────────────────────────────────
+\captionsetup{
+    font=small,
+    labelfont={bf,color=accentblue},
+    labelsep=period,
+    skip=4pt
+}
+% ─── Page Header / Footer ────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{%
+  \color{accentblue}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\small\color{codegray}\textit{LiFi Communication System — Raspberry Pi}}
+\fancyhead[R]{\small\color{codegray}\textit{Engineering Project Report}}
+\fancyfoot[C]{\small\thepage}
+
+% ─── Framed Boxes ────────────────────────────────────────────────────────────
+\newmdenv[
+  linecolor=accentblue!30,
+  backgroundcolor=accentblue!4,
+  linewidth=0.6pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=6pt,  innerbottommargin=6pt,
+  skipabove=6pt, skipbelow=6pt,
+  roundcorner=2pt
+]{infobox}
+
+\newmdenv[
+  linecolor=warnyellow!60,
+  backgroundcolor=warnyellow!6,
+  linewidth=0.6pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=6pt,  innerbottommargin=6pt,
+  skipabove=6pt, skipbelow=6pt,
+  roundcorner=2pt
+]{warnbox}
+
+% ─── Misc ────────────────────────────────────────────────────────────────────
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{0pt}
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  TITLE BLOCK
+% ═════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+\twocolumn[{%
+\begin{@twocolumnfalse}
+  \vspace*{4pt}
+  {\color{accentblue}\rule{\linewidth}{2pt}}
+  \vspace{6pt}
+
+  \begin{center}
+    {\fontsize{16}{21}\selectfont\bfseries
+      Light Fidelity (LiFi) using Raspberry Pi}
+
+    \vspace{10pt}
+    {\normalsize\color{codegray}\textit{EE1003-2026 Project Report}}
+    \vspace{6pt}
+
+    {\small
+      Aditya Appana -EE25BTECH11004 and Suraj N-EE25BTECH11056
+    }
+    \vspace{8pt}
+  \end{center}
+
+  {\color{accentblue!30}\rule{\linewidth}{0.8pt}}
+  \vspace{10pt}
+\end{@twocolumnfalse}
+}]
+
+% ═════════════════════════════════════════════════════════════════════════════
+\section{Introduction}
+% ═════════════════════════════════════════════════════════════════════════════
+
+Optical wireless communication — commonly referred to as \textbf{LiFi} (Light Fidelity) — offers a high-security, RF-interference-free medium for short-range data transfer. Naturally confined to the physical space illuminated by the source, it presents a low-cost entry point for experimental communication research.
+
+This report documents the iterative development of a \textit{simplex} LiFi data link between two Raspberry Pi single-board computers, using an infrared (IR) LED and a reverse-biased photodiode as the physical medium. Beginning from first-principles hardware diagnostics, the project progressed through multiple protocol revisions, achieving stable transmission of raw text at \textbf{200\,bps}, before encountering the hard architectural limits of pure-Python bit-banging during experimental audio transfer.
+
+The central engineering tension throughout the project was reconciling the real-time demands of optical bit-level timing with the inherent scheduling jitter of a general-purpose Linux OS — a constraint that motivated every major design decision presented here.
+
+% ═════════════════════════════════════════════════════════════════════════════
+\section{Hardware Architecture}
+% ═════════════════════════════════════════════════════════════════════════════
+
+To eliminate analogue noise and avoid the need for operational amplifiers, the physical layer was reduced to a bare-minimum digital logic circuit. The design evolved in parallel with software capabilities.
+
+\subsection{Transmitter Circuit (TX)}
+
+The transmitter employs an NPN digital switch topology. A \textbf{BC547} BJT allows the 3.3\,V GPIO logic of the Raspberry Pi to drive the IR LED from the higher-current 5\,V rail, maximising photonic output and transmission range.
+
+\begin{table}[H]
+\centering
+\caption{Transmitter Circuit Wiring}
+\label{tab:tx}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}l l X@{}}
+\toprule
+Component & Connects To & Detail \\
+\midrule
+Pi Pin 12 (GPIO\,18) & BC547 Base    & 2\,k$\Omega$ resistor \\
+Pi Pin 2 (5\,V)       & IR LED Anode  & 100\,$\Omega$ resistor \\
+IR LED Cathode        & BC547 Collector & Direct wire \\
+BC547 Emitter         & Pi Pin 6 (GND)  & Direct wire \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Receiver Circuit — Standard (RX-Standard)}
+
+For speeds up to 200\,bps, a minimal-component receiver was used. A reverse-biased photodiode is tied to a 10\,k$\Omega$ pull-up resistor. In ambient darkness, the GPIO pin reads a logic HIGH (3.3\,V). Under IR illumination the photodiode becomes conductive, pulling the line to logic LOW (0\,V) — a sharp digital swing polled continuously by the Python receiver.
+
+\begin{table}[H]
+\centering
+\caption{Standard Receiver Wiring (200\,bps)}
+\label{tab:rx}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}l l X@{}}
+\toprule
+Component & Connects To & Detail \\
+\midrule
+Pi Pin 1 (3.3\,V)    & Photodiode Cathode & 10\,k$\Omega$ pull-up \\
+Photodiode Cathode   & Pi Pin 16 (GPIO\,23) & Signal node \\
+Photodiode Anode     & Pi Pin 6 (GND) & Direct wire \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Receiver Circuit — UART Attempt (RX-UART)}
+
+To target 115,200\,bps using the Pi's hardware UART silicon, a two-transistor logic inverter was constructed. Q1 acted as a light-sensitive amplifier; Q2 inverted the output to satisfy the UART idle-high convention. This design was ultimately sidelined as even with an analogue front-end (op-amp) bare photodiodes are insufficiently immune to ambient light at the sub-microsecond timing resolution UART demands.
+
+% ═════════════════════════════════════════════════════════════════════════════
+\section{Software Evolution and Protocols}
+% ═════════════════════════════════════════════════════════════════════════════
+
+The software layer underwent four major revisions, each motivated by a concrete performance bottleneck or reliability failure.
+
+\subsection{Phase 1 — Basic Bit-Banging (20\,bps)}
+
+The first protocol implemented a standard \textbf{8-N-1} asynchronous serial frame. Each ASCII character is converted to its decimal value via Python's \texttt{ord()} function, then bit-shifted into eight discrete HIGH/LOW pulses bracketed by a start bit and a stop bit.
+
+The pivotal design choice was scheduling every bit transition using \emph{absolute} wall-clock timestamps (\texttt{time.time()}) rather than successive \texttt{time.sleep()} calls. Accumulated sleep-call error causes unbounded timing drift; absolute timestamps confine each error to a single bit period, yielding a stable, drift-free baseline of \textbf{20\,bps}.
+
+\subsection{Phase 2 — High-Speed Optimisation (200\,bps)}
+
+Profiling the Phase~1 receiver identified two I/O bottlenecks:
+
+\begin{itemize}[leftmargin=12pt, itemsep=1pt]
+  \item Per-character \texttt{print()} calls introducing unpredictable blocking delays.
+  \item Synchronous file writes after every received byte.
+\end{itemize}
+
+Both were resolved by batching: terminal updates throttled to every 50 characters; file writes deferred similarly. Reducing the bit period to $t_\text{bit} = 0.005$\,s yielded a \textbf{10$\times$} throughput gain to \textbf{200\,bps} with no missed frames. The transmitter signals end-of-file with a null byte (\texttt{0x00}), prompting the receiver to safely close and save the output file. This proved exceptionally reliable for payloads ranging from short strings to multi-paragraph text documents.
+
+\subsection{Phase 3 — Audio Transmission via Base64 Encoding}
+
+Transmitting binary \texttt{.wav} files directly over the ASCII protocol failed: non-printable bytes ($<\!32$ or $>\!126$) crashed the receiver's parsing logic. The solution was a transparent encoding layer:
+
+\begin{infobox}
+\textbf{Encoding pipeline:}\\[4pt]
+\hspace*{4pt}\texttt{.wav} binary \;$\xrightarrow{\;\text{base64}\;}$\; safe ASCII \;$\xrightarrow{\;\text{LiFi}\;}$\; decode \;$\xrightarrow{}$\; \texttt{.wav}
+\end{infobox}
+
+Base64 maps every 3 binary bytes to 4 printable characters, confining the alphabet to \texttt{[A–Za–z0–9+/=]} at a $\approx33\%$ payload overhead. While this guaranteed protocol integrity, the phase ultimately exposed two hard limits described in Section~\ref{sec:limits}.
+
+\subsection{Phase 4 — Real-Time Non-Volatile Persistence}
+
+Long transmissions introduced the risk of total data loss from a transient interruption (a passing shadow, mechanical vibration). The receiver was upgraded with periodic forced disk commits:
+
+\begin{lstlisting}[caption={Forced kernel bypass to physical storage}, label=lst:fsync]
+if chars_received % 5 == 0:
+    f.flush()
+    os.fsync(f.fileno())
+\end{lstlisting}
+
+\texttt{os.fsync()} bypasses the kernel page cache, writing buffered data directly to the SD card. At most 5 characters are lost in an unrecoverable failure — a critical fault-tolerance measure for slow, long-duration transfers.
+
+% ═════════════════════════════════════════════════════════════════════════════
+\section{Bandwidth Limits: Audio Transmission Failure}
+\label{sec:limits}
+% ═════════════════════════════════════════════════════════════════════════════
+
+Following the success of text transfer, the Phase~3 audio experiment was \textbf{deemed a failure} due to two compounding constraints.
+
+\subsection{Prohibitive Transmission Times}
+
+At 200\,bps the effective throughput is $\approx25$ bytes per second. A minimal audio file — 0.5\,s at 8\,kHz, 8-bit mono — occupies roughly 8\,KB before Base64 expansion.
+
+\begin{warnbox}
+\textbf{Estimated transmission times at 200\,bps:}\\[4pt]
+\hspace*{4pt}1-second audio clip $\;\approx\;$ \textbf{5–7 minutes}\\
+\hspace*{4pt}3-minute song $\;\approx\;$ \textbf{$\sim$30 hours}
+\end{warnbox}
+
+This rendered the system practically unusable for dynamic media, even at the protocol's maximum stable speed.
+
+\subsection{Catastrophic Data Corruption from OS Jitter}
+
+The extended transmission windows exposed the fundamental flaw of pure-Python GPIO bit-banging. Over a 5-minute window, the Linux kernel inevitably pre-empts the Python receiver for fractions of a millisecond to service background tasks (Wi-Fi polling, timer interrupts, filesystem housekeeping). During each pre-emption, an incoming light pulse is missed.
+
+In ASCII text, a dropped bit corrupts one character — a tolerable typo. In a Base64-encoded audio stream, a single bit-slip permanently desynchronises the entire decoding sequence:
+
+\begin{itemize}[leftmargin=12pt, itemsep=1pt]
+  \item All subsequent characters are shifted by one position.
+  \item The resulting \texttt{.wav} files were either entirely unreadable by the OS or produced severe corrupted static.
+\end{itemize}
+
+Post-mortem analysis of live-saved Base64 text strings (Section~\ref{sec:debug}) confirmed that bit-slips occurred randomly throughout every transmission, even under optimal optical alignment and with ambient light fully excluded by collimation tubes. The conclusion was unambiguous: eradicating software jitter requires migrating to a hardware UART chip or DMA-capable C libraries — both beyond the scope of a pure-Python GPIO implementation.
+
+% ═════════════════════════════════════════════════════════════════════════════
+\section{Debugging and Alignment Methodology}
+\label{sec:debug}
+% ═════════════════════════════════════════════════════════════════════════════
+
+Physical-layer alignment and electrical verification proved to be the most demanding aspects of the project. The following procedures were formalised through iterative experimentation.
+
+\subsection{Electrical Diagnostics}
+
+\begin{itemize}[leftmargin=12pt, itemsep=2pt]
+  \item \textbf{Multimeter Logic Probing.} The RX signal node was monitored to verify: (a) a firm idle-high of $\approx3.3$\,V in darkness, and (b) a clean drop to $\approx0$\,V under direct illumination, satisfying standard TTL thresholds.
+
+  \item \textbf{Pull-the-Plug Test.} Temporarily removing the photodiode from the circuit confirmed whether a stuck-HIGH condition was caused by a wiring fault or ambient light saturation.
+\end{itemize}
+
+\subsection{Optical Alignment Techniques}
+
+\begin{enumerate}[leftmargin=16pt, itemsep=2pt]
+  \item \textbf{Collimation Tubes.} Opaque cylinders fitted over the IR LED and photodiode restricted each component's field of view, suppressing 100\,Hz fluorescent-light flicker from the received data stream.
+
+\end{enumerate}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\section{Results Summary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+Table~\ref{tab:results} summarises the outcome of each development phase.
+
+\begin{table}[H]
+\centering
+\caption{Performance Summary Across Development Phases}
+\label{tab:results}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries\centering\arraybackslash}p{1cm}
+                                 >{\centering\arraybackslash}p{1.4cm}
+                                 X
+                                 >{\centering\arraybackslash}p{1cm}@{}}
+\toprule
+Phase & Speed & Key Outcome & Status \\
+\midrule
+1 & 20\,bps  & Stable 8-N-1 bit-banging; drift-free absolute timestamps & \textcolor{codegreen}{\textbf{Pass}} \\
+2 & 200\,bps & 10$\times$ gain via I/O batching; reliable text/file transfer & \textcolor{codegreen}{\textbf{Pass}} \\
+3 & 200\,bps & Base64 audio encoding; protocol integrity achieved & \textcolor{warnyellow}{\textbf{Partial}} \\
+4 & 200\,bps & Real-time fsync persistence; OS jitter confirmed fatal for audio & \textcolor{codered}{\textbf{Fail}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\definecolor{codered}{RGB}{183,28,28}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\section{Conclusion}
+% ═════════════════════════════════════════════════════════════════════════════
+
+This project demonstrated that a reliable, low-cost simplex LiFi network can be engineered from commodity discrete components and pure Python, provided the payload is strictly limited to low-bandwidth text and document files. The system reliably transmitted ASCII text and \texttt{.txt} documents at 200\,bps with no frame loss under stable optical conditions.
+
+The failure of the audio transmission phase is equally instructive: it precisely mapped the hard architectural boundary of software-defined GPIO bit-banging. Linux OS scheduling jitter is tolerable for asynchronous ASCII streams — a dropped bit is a single corrupted character. For Base64-encoded binary payloads, a single bit-slip desynchronises the entire decoding sequence, making software-only implementations fundamentally unsuitable for high-density binary transfer.
+
+Key conclusions:
+
+\begin{itemize}[leftmargin=12pt, itemsep=2pt]
+  \item Absolute-timestamp scheduling is essential for drift-free GPIO bit-banging on Linux.
+  \item I/O batching provides disproportionate throughput gains in the 100–200\,bps range.
+  \item Base64 is a practical encoding bridge for binary payloads over ASCII protocols — but exposes jitter sensitivity in long transfers.
+  \item Periodic \texttt{fsync()} is critical for fault-tolerant storage on embedded media.
+  \item Collimation and rigid mechanical alignment are prerequisites for consistent optical operation beyond trivial distances.
+  \item Scaling to audio and beyond requires hardware UART with analogue front-end conditioning (transimpedance amplifier, threshold comparator) or DMA-capable C drivers.
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\appendix
+\onecolumn
+% ═════════════════════════════════════════════════════════════════════════════
+
+
+
+
+\end{document}
